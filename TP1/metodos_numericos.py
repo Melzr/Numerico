@@ -127,7 +127,6 @@ def secante(f, x0, x1, tolerancia, max_iteraciones):
   """
 
     historial = []
-
     error = abs(x0-x1)
 
     i = 0

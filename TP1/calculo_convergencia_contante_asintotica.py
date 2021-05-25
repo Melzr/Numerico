@@ -56,3 +56,4 @@ def calcular_convergencia(historial):
     ns.append(convergencia)
     historial.pop(0)
   return ns
+  
