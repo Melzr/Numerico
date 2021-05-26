@@ -49,21 +49,25 @@
 \tableofcontents % Índice general
 \newpage
 \section{Introducción}
-El presente informe sera utilizado para especificar y analizar lo realizado en el Trabajo Practico 1 de Análisis Numérico I, en el cual se estudiaron métodos de búsqueda de raíces y aproximación numérica.
+El presente informe sera utilizado para especificar y analizar lo realizado en el Trabajo Practico 1 de Análisis Numérico I, en el cual se estudiaron métodos de búsqueda de raíces y su aplicación en diferentes problemas planteados.
 
 \section{Objetivos}
-Se estudian distintos métodos de búsqueda de raíces desarrollando los algoritmos de \textbf{Newton Raphson}, \textbf{serie de Leibniz}, \textbf{Newton Raphson modificado}, \textbf{Método de la Secante} y \textbf{Bisección}. Estos métodos fueron utilizados para hallar $\pi$, hallar raíces de tres funciones determinadas y para ayudar a un ser querido. Se realizará una comparativa entre los mismos analizando ventajas y desventajas de cada uno, también calculando el orden de convergencia y la constante asintótica.
+Se estudian distintos métodos de búsqueda de raíces desarrollando los algoritmos de \textbf{Newton Raphson}, \textbf{serie de Leibniz}, \textbf{Newton Raphson modificado}, \textbf{Método de la Secante} y \textbf{Bisección}. Estos métodos fueron utilizados para hallar $\pi$, hallar raíces de tres funciones determinadas y para ayudar a un ser querido. Se realizará una comparativa entre los mismos analizando ventajas y desventajas de cada uno, también calculando su orden de convergencia y constante asintótica.
 
 \section{Especificaciones sobre el desarrollo del trabajo}
 
 
 \subsection{Método para seres queridos}
 Se busca aplicar uno de los métodos vistos en clase en algo de la vida cotidiana para ayudar a un ser querido.
-Se decidió utilizar el \textbf{método de la bisección} ya que es fue considerado como el mas sencillo de aplicar en lo cotidiano al ser el mas intuitivo y no necesitar hacer cálculos complejos de funciones y derivadas. Lo aplicamos para ayudar a un hermano/a pequeño a aprender a usar un diccionario y detallamos el proceso y las conclusiones en el archivo \verb|TP1_ramiro_6_2021_05_26.ipynb|.
+Se decidió utilizar el \textbf{método de la bisección} ya que es fue considerado como el mas sencillo de aplicar en lo cotidiano al ser el mas intuitivo y no necesitar hacer cálculos complejos de funciones y derivadas. Lo aplicamos para ayudar a un hermano/a pequeño a aprender a usar un diccionario y detallamos el proceso y las conclusiones en el archivo \verb|TP1_ramiro_6_2021_05_26.ipynb|. 
+
+Este ejercicio permitió aplicar uno de los métodos aprendidos (en este caso el de la bisección), llevándolo a un plano mas cotidiano, reforzando el aspecto teórico aprendido durante las clases.
+
 
 
 \subsection{Hallar \texorpdfstring{$\pi$}p por dos caminos}
 El objetivo de esta parte es encontrar $\pi$ usando la \textbf{serie de Leibniz} y el método de búsqueda de raíces de \textbf{Newton-Raphson} en 64 y 32 bits, con la máxima precisión de la herramienta en el caso de Newton Raphson y con distinta cantidad de iteraciones en Leibniz.
+
 Para Newton Raphson fue utilizada la función $\sin(x)$, que cumple con las condiciones del método ya que es continua al igual que su derivada, y la misma no se anula en $\pi$. La semilla elegida fue $x_0=3$ ya que el método además requiere una semilla que esté lo suficientemente cerca de la raíz.
 
 \begin{figure}[H]
@@ -81,7 +85,7 @@ Todo lo mencionado, los resultados y la implementación de los métodos se encue
 
 
 \subsection{Búsqueda de raíces}
-En esta sección del trabajo se utilizaron los diferentes métodos aprendidos en clases para hallar las raíces de tres funciones, estudiar su convergencia .
+En esta sección del trabajo se utilizaron los diferentes métodos aprendidos en clases para hallar las raíces de tres funciones y estudiar la convergencia de cada uno.
 Estos son:
 \begin{itemize}
     \item Método de Newton- Raphson
@@ -93,9 +97,11 @@ Para estudiar estos métodos y usarlos en la búsqueda de raíces, se comenzó p
 
 Una vez desarrollados los algoritmos de los métodos, fueron usados para hallar la raíz de cada una de las funciones en el intervalo solicitado. Como criterio de paro se todos los métodos se usaron las cotas de error $1*10^{-5}$ y $1*10^{-13}$, es decir que el modulo de la diferencia entre dos iteraciones sucesivas sea menor a ese valor. Además, se uso $x_0=1,0$ como semilla para Newton-Raphson y Newton-Raphson modificado, y a los extremos del intervalo (0 y 2) como semillas del método de la secante.
 
-En la función 3, se observo que con el método de Newton-Raphson y con el de Newton-Raphson modificado y la semilla utilizada no pudieron converger. El motivo de esto fue explicado en el archivo entregado, junto con el nuevo calculo con este método con una semilla mejor (elegida basada en el gráfico de la función en este caso, pero también se podría obtener una semilla mejor primero usando el método de la bisección y a partir de allí usar NR) 
+En la función 3, se observó que con la o las semillas utilizadas en el método de Newton-Raphson, el de Newton-Raphson modificado, y el de la secante, estos procedimientos no pudieron converger. El motivo de esto fue explicado en el archivo entregado, junto con el nuevo calculo con este método con mejores semillas (elegidas basada en el gráfico de la función en este caso, pero también se podría obtener una semilla mejor usando el método de la bisección primero y a partir de allí usar Newton-Raphson).
 
-En la ultima parte de esta sección fueron implementados algoritmos para hallar el orden de convergencia y la constante asintótica para cada método con las diferentes funciones y las distintas cota de error. A continuación se adjuntaron los gráficos que recopilan la información hallada.
+En la ultima parte de este enunciado fueron implementados algoritmos para hallar el orden de convergencia y la constante asintótica para cada método con las diferentes funciones y las distintas cota de error. Ver las secciones \textbf{Gráficos del orden de convergencia con ambas cotas} y \textbf{Gráficos de la constante asintótica con ambas cotas}.
+
+En esta parte del trabajo se pudieron observar las ventajas y desventajas del uso de cada método de búsqueda de raíces para diferentes funciones. El método de Newton-Raphson es muy poderoso por ser el de mayor convergencia (cuadrática para raíces simples), sin embargo para usarlo se necesita la derivada de la función estudiada, tiene convergencia lineal para raíces dobles y necesita de una buena aproximación inicial. Esto ultimo se debe a que de no tener una buena semilla, el método no va a converger, lo cual lo diferencia del de la bisección, el cual, a pesar de hacerlo mas lento, (linealmente), siempre converge. El otro procedimiento estudiado, el de la secante, tiene mayor convergencia que el de la bisección, pero menor que el de Newton-Raphson, y como este, necesita una buena aproximación inicial (y en su caso, no solo una, sino dos semillas) para converger. Sin embargo, tiene la ventaja de que no precisa la derivada de la función que se esta analizando. 
 
 \newpage
 \subsubsection{Gráficos del orden de convergencia con ambas cotas}
@@ -126,6 +132,7 @@ En la ultima parte de esta sección fueron implementados algoritmos para hallar 
     \includegraphics[width=0.9\textwidth]{asinf3.png}
 \end{figure}
 
+\newpage
 Los casos donde no se ven graficados algunos métodos es porque convergen demasiado rápido y no hay suficiente información para hacer los cálculos.
 No se pueden sacar conclusiones definitivas con respecto a la convergencia de cada método ya que teóricamente se calcula con infinitas iteraciones, cosa que es imposible para una computadora. Aumentar el número de iteraciones tampoco sería viable ya que llegará un momento en que la diferencia entre iteraciones será tan pequeña que harán underflow.
 
