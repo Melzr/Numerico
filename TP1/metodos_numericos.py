@@ -9,10 +9,10 @@ def newton_raphson(x0, f, df, max_iteraciones, tolerancia):
   Recibe una semilla x0, una funcion f y su derivada df continuas, una cantidad maxima de iteraciones y una tolerancia
   que sera la cota de la diferencia entre las dos ultimas iteraciones en caso de converger.
   Devolvera el historial de iteraciones con xn y el error como la diferencia con xn-1 en cada iteracion.
-  Si la derivada de la funcion se anula, devolvera el resultado de la ultima iteracion.
+  Si la derivada de la funcion es menor a 1.10^-14, devolvera el resultado de la ultima iteracion.
   """
 
-  if (df(x0) == 0):
+  if (abs(df(x0)) < 1e-14):
     print("Error: division por cero")
     return None
 
@@ -28,7 +28,7 @@ def newton_raphson(x0, f, df, max_iteraciones, tolerancia):
 
   i = 2
   while ( (error > tolerancia) and (i < max_iteraciones) ):
-    if (df(xn) == 0):
+    if (abs(df(xn)) < 1e-14):
       print("Error: division por cero")
       break
     xa = xn
@@ -45,7 +45,7 @@ def biseccion_aux(px, a, b, f, tolerancia, iteraciones_restantes, historial):
 
   py = (a+b)/2
 
-  if( abs(px - py) < tolerancia or iteraciones_restantes <= 0 ):
+  if( abs(px - py) < cota_error or iteraciones_restantes <= 0 ):
     return py
   
   if ( (f(py) > 0 and f(a) < 0) or (f(py) < 0 and f(a) > 0) ):
@@ -54,7 +54,7 @@ def biseccion_aux(px, a, b, f, tolerancia, iteraciones_restantes, historial):
       a = py
 
   historial.append({'xn': py, 'error': abs(px - py)})
-  return biseccion_aux(py, a, b, f, tolerancia, iteraciones_restantes-1, historial)
+  return biseccion_aux(py, a, b, f, cota_error, iteraciones_restantes-1, historial)
 
 
 def biseccion(a, b, f, tolerancia, max_iteraciones):
@@ -78,7 +78,7 @@ def biseccion(a, b, f, tolerancia, max_iteraciones):
   elif ( (f(p0) > 0 and f(b) < 0) or (f(p0) < 0 and f(b) > 0) ):
     a = p0
   
-  biseccion_aux(p0, a, b, f, tolerancia, max_iteraciones, historial)
+  biseccion_aux(p0, a, b, f, cota_error, max_iteraciones, historial)
   return historial
 
 
@@ -90,7 +90,7 @@ def newton_raphson_modificado(x0, f, df, ddf, max_iteraciones, tolerancia):
   Devolvera el historial de iteraciones con xn y el error como la diferencia con xn-1 en cada iteracion.
   """
 
-  if (df(x0) == 0):
+  if (abs((df(x0)**2 - f(x0)*ddf(x0))) < 1e-14):
     print("Error: division por cero")
 
   historial = []
@@ -104,11 +104,11 @@ def newton_raphson_modificado(x0, f, df, ddf, max_iteraciones, tolerancia):
   #print("    1| %.15f | %.15f | %.15f" % (x0, xn, error) )
 
   i = 2
-  while ( (error > tolerancia) and (i < max_iteraciones) ):
-    if (df(xn) == 0):
+  while ( (error > cota_error) and (i < max_iteraciones) ):
+    xa = xn
+    if (abs((df(xa)**2 - f(xa)*ddf(xa))) < 1e-14):
       print("Error: division por cero")
       break
-    xa = xn
     xn = (xa - (f(xa) * df(xa))/(df(xa)**2 - f(xa)*ddf(xa)))
     error = abs(xn - xa)
     historial.append({'xn': xn, 'error': error})
@@ -127,6 +127,7 @@ def secante(f, x0, x1, tolerancia, max_iteraciones):
   """
 
     historial = []
+
     error = abs(x0-x1)
 
     i = 0
@@ -134,7 +135,7 @@ def secante(f, x0, x1, tolerancia, max_iteraciones):
     historial.append({'xn': pn, 'error': error})
 
     while error > tolerancia and i < max_iteraciones :
-        if (f(x1) == f(x0)):
+        if (abs(f(x1) - f(x0)) < 1e-14):
             print("Error: division por cero")
             break
         pn = x1 - ( (f(x1)*(x1-x0))/(f(x1)-f(x0)) )
