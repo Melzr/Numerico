@@ -3,4 +3,4 @@
 
 **Curso Sassano - 1C2021**
 
-Melina Lazzaro, Joaquin Singer y Agustina Bocaccio
+Melina Lazzaro, Joaquín Singer y Agustina Bocaccio
