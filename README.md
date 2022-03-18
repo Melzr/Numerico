@@ -7,7 +7,14 @@ TP2: Descomposición de señales mediante series de Fourier a través de resoluc
 
 <br/>
 
-**Métodos numéricos programados en Python:**
+**Integrantes:**
+- Bocaccio, Agustina - [agusboccacio](https://github.com/agusbocaccio)
+- Lazzaro, Melina - [Melzr](https://github.com/Melzr)
+- Singer, Joaquín - [josinger](https://github.com/josinger)
+
+<br/>
+
+**Métodos programados:**
     
     Búsqueda de raíces:
       - Newton-Raphson
@@ -17,9 +24,3 @@ TP2: Descomposición de señales mediante series de Fourier a través de resoluc
     Resolución de sistemas de ecuaciones lineales: 
       - Eliminación Gaussiana
       - Gauss-Seidel  
-
-**Integrantes del grupo:**
-
-    - Melina Lazzaro
-    - Joaquín Singer
-    - Agustina Bocaccio
